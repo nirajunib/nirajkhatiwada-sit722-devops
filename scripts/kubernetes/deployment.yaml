@@ -1,1 +1,77 @@
-# Your Solution
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: book
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: book
+  template:
+    metadata:
+      labels:
+        app: book
+    spec:
+      containers:
+      - name: book
+        image: bookstorepart5.azurecr.io/book:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        env:
+        - name: PORT
+          value: "8080"
+        - name: DATABASE_URL
+          value: "postgresql://part5_v0rq_user:XtJXcHhTQ7StaLMtZFXY9tIx3gtGj8gN@dpg-crn43ul6l47c73a9adug-a.oregon-postgres.render.com/part5_v0rq"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: book
+spec:
+  selector:
+    app: book
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory
+  template:
+    metadata:
+      labels:
+        app: inventory
+    spec:
+      containers:
+      - name: inventory
+        image: bookstorepart5.azurecr.io/inventory:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8090
+        env:
+        - name: PORT
+          value: "8090"
+        - name: DATABASE_URL
+          value: "postgresql://part5_v0rq_user:XtJXcHhTQ7StaLMtZFXY9tIx3gtGj8gN@dpg-crn43ul6l47c73a9adug-a.oregon-postgres.render.com/part5_v0rq"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory
+spec:
+  selector:
+    app: inventory
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 8090
+      targetPort: 8090
