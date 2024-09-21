@@ -7,7 +7,7 @@ set -u
 
 set -e
 
-cd ./book_catalog
+cd ../book_catalog
 docker build --no-cache -t "$CONTAINER_REGISTRY/book:$VERSION" .
 
 cd ../inventory_management
