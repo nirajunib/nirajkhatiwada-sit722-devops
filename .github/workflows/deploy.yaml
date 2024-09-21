@@ -1,0 +1,34 @@
+name: Deploy bookstore
+
+on:
+  push: 
+    branches:
+      - main
+  workflow_dispatch: 
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    env:
+      VERSION: ${{ github.sha }}
+      CONTAINER_REGISTRY: ${{ secrets.CONTAINER_REGISTRY }}
+      REGISTRY_UN: ${{ secrets.REGISTRY_UN }}
+      REGISTRY_PW: ${{ secrets.REGISTRY_PW }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build
+        run: ./scripts/build-image.sh
+
+      - name: Publish
+        run: ./scripts/push-image.sh
+
+      - uses: tale/kubectl-action@v1
+        with:
+          base64-kube-config: ${{ secrets.KUBE_CONFIG }}
+          kubectl-version: v1.30.3
+      
+      - name: Deploy
+        run: ./scripts/deploy.sh
