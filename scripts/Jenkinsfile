@@ -1,0 +1,45 @@
+pipeline {
+    agent any
+    environment {
+        VERSION = "${env.GIT_COMMIT}"
+        CONTAINER_REGISTRY = credentials('container-registry')
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/nirajunib/nirajkhatiwada-sit722-devops.git'
+            }
+        }
+        stage('Set Permissions') {
+            steps {
+                sh 'chmod +x ./scripts/build-image.sh ./scripts/push-image.sh ./scripts/deploy.sh'
+            }
+        }
+        stage('Build Image') {
+            steps {
+                sh './scripts/build-image.sh'
+            }
+        }
+        stage('Push Image') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'acr', 
+                                                      usernameVariable: 'REGISTRY_UN', 
+                                                      passwordVariable: 'REGISTRY_PW')]) {
+                        sh './scripts/push-image.sh'
+                    }
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh './scripts/deploy.sh'
+            }
+        }
+    }
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}
