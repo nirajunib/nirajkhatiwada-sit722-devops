@@ -2,6 +2,6 @@
 
 set -u
 
-export KUBECONFIG=/home/ubuntu/.kube/config
+export KUBECONFIG=/var/lib/jenkins/.kube/config
 echo "Deploying to Kubernetes..."
 kubectl apply -f ./scripts/kubernetes/deployment.yaml
