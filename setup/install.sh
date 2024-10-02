@@ -26,3 +26,6 @@ sudo apt-get install docker.io
 sudo systemctl start docker
 sudo usermod -aG docker jenkins
 sudo systemctl restart jenkins
+# Grant permissions to Jenkins
+sudo chown -R ubuntu:jenkins /home/ubuntu/.kube
+sudo chmod -R 770 /home/ubuntu/.kube
