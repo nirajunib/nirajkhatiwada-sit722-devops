@@ -29,3 +29,11 @@ sudo systemctl restart jenkins
 # Grant permissions to Jenkins
 sudo chown -R ubuntu:jenkins /home/ubuntu/.kube
 sudo chmod -R 770 /home/ubuntu/.kube
+# Install Prometheus
+wget https://github.com/prometheus/prometheus/releases/download/v2.54.1/prometheus-2.54.1.linux-amd64.tar.gz
+tar -xvf prometheus-2.54.1.linux-amd64.tar.gz
+# Install Grafaana
+sudo apt-get install -y adduser libfontconfig1 musl
+wget https://dl.grafana.com/oss/release/grafana_11.2.2_amd64.deb
+sudo dpkg -i grafana_11.2.2_amd64.deb
+sudo /bin/systemctl start grafana-server
