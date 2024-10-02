@@ -1,4 +1,4 @@
-resource "azurerm_kubernetes_cluster" "sit722part5aks" {
+resource "azurerm_kubernetes_cluster" "aksdevops" {
   name                = var.app_name
   location            = var.location
   resource_group_name = azurerm_resource_group.sit722.name

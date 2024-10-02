@@ -21,3 +21,8 @@ az aks get-credentials --resource-group deakinuni --name aksdevops --overwrite-e
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 chmod +x kubectl
 sudo mv kubectl /usr/bin/
+# Install Docker
+sudo apt-get install docker.io
+sudo systemctl start docker
+sudo usermod -aG docker jenkins
+sudo systemctl restart jenkins
