@@ -1,4 +1,4 @@
 import os
 
 DATABASE_URL = os.getenv(
-    'DATABASE_URL', 'postgresql://part5_v0rq_user:XtJXcHhTQ7StaLMtZFXY9tIx3gtGj8gN@dpg-crn43ul6l47c73a9adug-a.oregon-postgres.render.com/part5_v0rq')
+    'DATABASE_URL', 'postgresql://devops_typu_user:nysJbDDFX74LfjABz475t2kMwyLILV8D@dpg-crujcibtq21c738jqvrg-a.oregon-postgres.render.com/devops_typu')

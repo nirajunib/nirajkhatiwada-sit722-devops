@@ -4,7 +4,7 @@ set -u
 
 : "${CONTAINER_REGISTRY:=awesomedevops.azurecr.io}"
 : "${VERSION:=latest}"
-: "${REGISTRY_UN:=bookstorepart5}"
+: "${REGISTRY_UN:=awesomedevops}"
 : "${REGISTRY_PW:=redacted}"
 
 set -e
