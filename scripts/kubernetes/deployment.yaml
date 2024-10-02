@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: book
-        image: bookstorepart5.azurecr.io/book:latest
+        image: awesomedevops.azurecr.io/book:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
@@ -53,7 +53,7 @@ spec:
     spec:
       containers:
       - name: inventory
-        image: bookstorepart5.azurecr.io/inventory:latest
+        image: awesomedevops.azurecr.io/inventory:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8090

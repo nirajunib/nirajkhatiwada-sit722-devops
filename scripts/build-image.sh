@@ -2,7 +2,7 @@
 
 set -u
 
-: "${CONTAINER_REGISTRY:=bookstorepart5.azurecr.io}"
+: "${CONTAINER_REGISTRY:=awesomedevops.azurecr.io}"
 : "${VERSION:=latest}"
 
 set -e
